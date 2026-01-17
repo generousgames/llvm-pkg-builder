@@ -32,13 +32,6 @@ option(BUILD_SHARED_LIBS "Build shared libs" OFF)
 # If you want shared CMake helpers from your submodule:
 # set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/third_party/prebuild-core/cmake/Modules;${CMAKE_MODULE_PATH}")
 
-# Note: LLVM will override the output directories if they are set. So the following are essentially NOOPs.
-# LLVM prefers us to set CMAKE_INSTALL_PREFIX and call cmake --install.
-# set(BUILD_DIR ${CMAKE_SOURCE_DIR}/build)
-# set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${BUILD_DIR}/lib)
-# set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${BUILD_DIR}/lib)
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${BUILD_DIR}/bin)
-
 # Helpful default for prebuilts
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
