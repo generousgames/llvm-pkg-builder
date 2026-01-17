@@ -2,6 +2,10 @@
 
 This project will build, bundle and deploy LLVM as a package, to be used by the Mimi Engine.
 
+## llvm-pkg-builder details
+* LLVM does not respect CMAKE_ARCHIVE_OUTPUT_DIRECTORY, CMAKE_LIBRARY_OUTPUT_DIRECTORY, CMAKE_RUNTIME_OUTPUT_DIRECTORY. But instead prefers defining CMAKE_INSTALL_PREFIX and running an extra "cmake --install" step.
+* LLVM does not require "toolchainFile" parameter within CMakePresets. It will manage its own environment.
+
 # Build steps
 
 preset = { macos-arm64-Release, macos-arm64-Debug }

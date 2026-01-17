@@ -26,6 +26,14 @@ if [ "${1:-}" = "setup" ]; then
     echo "2. Initializing submodules..."
     git submodule update --init --recursive
 
+    BRANCH_NAME=$(git config -f .gitmodules submodule.dependencies/llvm.branch-ref)
+    if [ ! -z "$BRANCH_NAME" ]; then
+        echo ">> Checking out branch ${BRANCH_NAME}..."
+        pushd dependencies/llvm
+            git checkout ${BRANCH_NAME}
+        popd
+    fi
+
     EXPECTED_NODE_VERSION=$(cat .nvmrc)
     NODE_VERSION=$(node --version)
 

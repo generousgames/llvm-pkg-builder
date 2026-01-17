@@ -1,3 +1,4 @@
 [submodule "dependencies/llvm"]
 	path = dependencies/llvm
 	url = https://github.com/llvm/llvm-project.git
+	branch-ref = tags/llvmorg-21.1.8
