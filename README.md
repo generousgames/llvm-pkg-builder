@@ -2,8 +2,9 @@
 
 This project will build, bundle and deploy LLVM as a package, to be used by the Mimi Engine.
 
-## llvm-pkg-builder details
+## Details
 * LLVM does not require "toolchainFile" parameter within CMakePresets. It manages its own environment.
+* To update the LLVM version, update branch-ref within .gitmodules, and version within manifest.json. 
 
 # Build steps
 
