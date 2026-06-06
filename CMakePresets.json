@@ -40,6 +40,42 @@
         "LLVM_INCLUDE_DOCS": "OFF",
         "LLVM_ENABLE_PIC": "OFF"
       }
+    },
+    {
+      "name": "windows-x86_64-Release",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/projects/windows-x86_64-Release",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/lib/Release",
+        "LLVM_ENABLE_PROJECTS": "clang",
+        "LLVM_BUILD_EXAMPLES": "OFF",
+        "LLVM_INCLUDE_EXAMPLES": "OFF",
+        "LLVM_BUILD_TESTS": "OFF",
+        "LLVM_INCLUDE_TESTS": "OFF",
+        "LLVM_BUILD_BENCHMARKS": "OFF",
+        "LLVM_INCLUDE_BENCHMARKS": "OFF",
+        "LLVM_INCLUDE_DOCS": "OFF",
+        "LLVM_ENABLE_PIC": "OFF"
+      }
+    },
+    {
+      "name": "windows-x86_64-Debug",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/projects/windows-x86_64-Debug",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/lib/Debug",
+        "LLVM_ENABLE_PROJECTS": "clang",
+        "LLVM_BUILD_EXAMPLES": "OFF",
+        "LLVM_INCLUDE_EXAMPLES": "OFF",
+        "LLVM_BUILD_TESTS": "OFF",
+        "LLVM_INCLUDE_TESTS": "OFF",
+        "LLVM_BUILD_BENCHMARKS": "OFF",
+        "LLVM_INCLUDE_BENCHMARKS": "OFF",
+        "LLVM_INCLUDE_DOCS": "OFF",
+        "LLVM_ENABLE_PIC": "OFF"
+      }
     }
   ],
   "buildPresets": [
@@ -50,6 +86,14 @@
     {
       "name": "macos-arm64-Debug",
       "configurePreset": "macos-arm64-Debug"
+    },
+    {
+      "name": "windows-x86_64-Release",
+      "configurePreset": "windows-x86_64-Release"
+    },
+    {
+      "name": "windows-x86_64-Debug",
+      "configurePreset": "windows-x86_64-Debug"
     }
   ]
 }
