@@ -29,8 +29,7 @@
             },
             "code_gen": {
                 "build_type": "Release",
-                "link_type": "Static",
-                "optimization": "-O3"
+                "link_type": "Static"
             },
             "runtime": {
                 "stdlib": "libc++",
@@ -62,8 +61,7 @@
             },
             "code_gen": {
                 "build_type": "Debug",
-                "link_type": "Static",
-                "optimization": "-O0"
+                "link_type": "Static"
             },
             "runtime": {
                 "stdlib": "libc++",
