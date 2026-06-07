@@ -120,13 +120,17 @@ if [ "${1:-}" = "setup" ]; then
     echo "2. Initializing submodules..."
     git submodule update --init --recursive
 
-    BRANCH_NAME=$(git config -f .gitmodules submodule.dependencies/llvm.branch-ref)
-    if [ ! -z "$BRANCH_NAME" ]; then
-        echo ">> Checking out branch ${BRANCH_NAME}..."
-        pushd dependencies/llvm
-            git checkout ${BRANCH_NAME}
-        popd
-    fi
+    # Check out the pinned ref for any submodule that declares `branch-ref` in
+    # .gitmodules (generic — derives name/path/ref, no hardcoded submodule name).
+    BRANCH_REF_KEYS=$(git config -f .gitmodules --name-only --get-regexp '\.branch-ref$' 2>/dev/null || true)
+    for KEY in ${BRANCH_REF_KEYS}; do
+        NAME=${KEY#submodule.}
+        NAME=${NAME%.branch-ref}
+        REF=$(git config -f .gitmodules --get "submodule.${NAME}.branch-ref")
+        SUBPATH=$(git config -f .gitmodules --get "submodule.${NAME}.path")
+        echo ">> Checking out ${SUBPATH} @ ${REF}..."
+        git -C "${SUBPATH}" checkout "${REF}"
+    done
 
     EXPECTED_NODE_VERSION=$(cat .nvmrc)
 
