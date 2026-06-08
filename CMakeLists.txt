@@ -48,6 +48,21 @@ endif()
 # Forward options to the subproject BEFORE adding it, so its CMake picks them up.
 set(BUILD_SHARED_LIBS ${BUILD_SHARED_LIBS} CACHE BOOL "" FORCE)
 
+# libclang is special-cased by LLVM's build: on Windows it is produced as a DLL
+# even when BUILD_SHARED_LIBS=OFF, leaving only an import lib (libclang.lib) in
+# lib/ and a libclang.dll in bin/ that our libs-only bundle never ships. Force a
+# genuine static libclang on every platform so consumers (e.g. mimi_reflect) link
+# it in with no runtime DLL — matching how macOS already produced libclang.a.
+# NOTE: consumers including <clang-c/*.h> against a static libclang must define
+# CINDEX_NO_EXPORTS so the headers don't decorate the C API with __declspec(dllimport).
+set(LIBCLANG_BUILD_STATIC ON CACHE BOOL "" FORCE)
+
+# Same story for LLVM's C API: on Windows LLVM builds LLVM-C.dll by default
+# (LLVM_BUILD_LLVM_C_DYLIB ON), leaving an LLVM-C.lib import lib in the bundle and
+# a runtime DLL dependency. macOS never builds it. Turn it off so the Windows
+# bundle is fully static and matches macOS (mimi_reflect uses libclang, not LLVM-C).
+set(LLVM_BUILD_LLVM_C_DYLIB OFF CACHE BOOL "" FORCE)
+
 # Add LLVM as a subdir; it defines targets like 'llvm'/'llvm-config'
 add_subdirectory("${LLVM_SOURCE_DIR}" "${CMAKE_BINARY_DIR}/llvm")
 
